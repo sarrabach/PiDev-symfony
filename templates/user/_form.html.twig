@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+<table>
+     <tr>
+            <td class="text-black">{{ form_label(form.username,"Username :") }}</td>
+            <td>{{ form_widget(form.username) }}</td>
+            <td class="alert">{{ form_errors(form.username) }}</td>
+        </tr>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    </table>
+{{ form_end(form) }}

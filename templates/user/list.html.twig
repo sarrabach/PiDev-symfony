@@ -1,0 +1,23 @@
+<h1>List of guides</h1> 
+<a href="{{ path('addUser') }}">Add new user</a>
+<table border="1">
+    {% for c in list %}
+    <tr>
+       
+        <td>{{ c.userFirstname }}</td>
+        <td>{{ c.userLastname }}</td>
+        <td>{{ c.userMail }}</td>
+        <td>{{ c.userPhone }}</td>
+        <td>{{ c.username }}</td>
+        <td>{{ c.password }}</td>
+        <td>{{ c.role}}</td>
+        <td>{{ c.lang1 }}</td>
+        <td>{{ c.lang2 }}</td>
+        <td>{{ c.lang3 }}</td>
+        <td>{{ c.cityname }}</td>
+         <td><a href="{{ path('updateUser',{'id':c.idUser}) }}">Update</a></td>
+         <td><a href="{{ path('delete',{'id':c.idUser}) }}">Delete</a></td>
+         
+    </tr>
+    {% endfor %}
+</table>

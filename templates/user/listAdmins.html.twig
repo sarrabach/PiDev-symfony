@@ -1,0 +1,19 @@
+<h1>List of Admins</h1> 
+<a href="{{ path('addAdmin') }}">Add new Admin</a>
+<table border="1">
+    {% for c in list %}
+    <tr>
+    <td>{{ c.userFirstname }}</td>
+    <td>{{ c.userLastname }}</td>
+    <td>{{ c.userMail }}</td>
+    <td>{{ c.userPhone }}</td>
+    <td>{{ c.username }}</td>
+    <td>{{ c.password }}</td>
+   
+        
+         <td><a href="{{ path('updateAdmin',{'id':c.idUser}) }}">Update</a></td>
+        <td><a href="{{ path('deleteAdmin',{'id':c.idUser}) }}">Delete</a></td>
+         
+    </tr>
+    {% endfor %}
+</table>
