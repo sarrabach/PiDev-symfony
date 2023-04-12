@@ -176,17 +176,22 @@ class UserController extends AbstractController
             'form' => $form,'userconnected'=>$userconnected
         ]);
     }
-
-    #[Route('/{idUser}', name: 'app_user_delete', methods: ['POST'])]
+    #[Route('/{idUser}', name: 'app_user_delete', methods: ['DELETE'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getIdUser(), $request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
         }
-
+    
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+   
+
+
+
 
     public function getDataUserConnected(SessionInterface $session)
     {

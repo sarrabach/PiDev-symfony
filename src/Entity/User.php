@@ -92,7 +92,7 @@ class User
      *
      * @ORM\Column(name="lang1", type="string", length=120, nullable=true)
      */
- 
+    
     private $lang1;
 
     /**
@@ -100,6 +100,7 @@ class User
      *
      * @ORM\Column(name="lang2", type="string", length=100, nullable=true)
      */
+   
     private $lang2;
 
     /**
@@ -107,6 +108,7 @@ class User
      *
      * @ORM\Column(name="lang3", type="string", length=100, nullable=true)
      */
+   
     private $lang3;
 
     /**
