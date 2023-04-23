@@ -45,7 +45,14 @@ class UtilisateurRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
+    public function findByIDobject(string $id): ?User
+    {
+        return $this->findOneBy(['idUser' => $id]);
+    }
+    public function findByemail(string $email): ?User
+    {
+        return $this->findOneBy(['userMail' => $email]);
+    }
     // /**
     //  * @return Utilisateur[] Returns an array of Utilisateur objects
     //  */

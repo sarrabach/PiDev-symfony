@@ -9,5 +9,5 @@
 
     <a href="{{ path('app_tourist_index') }}">back to list</a>
 
-    {{ include('tourist/_delete_form.html.twig') }}
+    {{ include('tourist/_delete_form.html.twig',  {'button_label': 'Delete'}) }}
 {% endblock %}
