@@ -55,13 +55,25 @@ class User1Type extends AbstractType
         ])
         // Language fields
         ->add('lang1', LanguageType::class, [
-            'label' => 'Primary Language','attr'=>['class'=>'form-control']
+            'label' => 'Primary Language',
+            'attr' => [
+                'class' => 'form-control',
+            ],
+            'choice_attr' => function($choice, $key, $value) {
+                return ['style' => 'color: black;']; // Add style attribute to change the color of text
+            }
         ])
         ->add('lang2', LanguageType::class, [
-            'label' => 'Secondary Language','attr'=>['class'=>'form-control']
+            'label' => 'Secondary Language','attr'=>['class'=>'form-control mb-3'],
+            'choice_attr' => function($choice, $key, $value) {
+                return ['style' => 'color: black;']; // Add style attribute to change the color of text
+            }
         ])
         ->add('lang3', LanguageType::class, [
-            'label' => 'Tertiary Language','attr'=>['class'=>'form-control']
+            'label' => 'Tertiary Language','attr'=>['class'=>'form-control mb-3'],
+            'choice_attr' => function($choice, $key, $value) {
+                return ['style' => 'color: black;']; // Add style attribute to change the color of text
+            }
         ])
 
         // Location fields

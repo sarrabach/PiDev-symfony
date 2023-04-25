@@ -34,13 +34,20 @@
 							<i class="fas fa-bars"></i>
 						</a>
 					</li>
+					</li>
 					<li class="nav-item d-none d-sm-inline-block">
-						<a href="index3.html" class="nav-link">Home</a>
+						<a href="{{ path('app_user_index') }}" class="nav-link">Home</a>
 					</li>
 					<li class="nav-item d-none d-sm-inline-block">
 						<a href="#" class="nav-link">Contact</a>
 					</li>
-				</ul>
+			{% if userconnected!=null %}
+					{% if userconnected.role=="Touriste" or userconnected.role=="Guide"  %}
+						<li class="nav-item d-none d-sm-inline-block">
+							<a href="{{ path('app_user_approve') }}" class="nav-link">Add</a>
+						</li>
+					{% endif %}
+					{% endif %}
 
 				<!-- Right navbar links -->
 				<ul
@@ -50,14 +57,15 @@
 						<a href="{{ path('app_login') }}" class="nav-link"><i class="fas fa-sign-in-alt">&nbsp;login</i></a>
 					</li>
 						{% else %}
+
+
 							<li class="nav-item d-none d-sm-inline-block">
-								<p>Bonjour {{ userconnected.userFirstname }}&nbsp;{{ userconnected.userLastname }}</p>
+								<a  class="nav-link"><i id="user-icon" class="fas fa-user"></i></a>
 							</li>
-							<li class="nav-item d-none d-sm-inline-block">
-								<a href="{{ path('app_logout') }}" class="nav-link"><i class="fas fa-sign-in-alt">&nbsp;Logout</i></a>
-							</li>
+							
 					{% endif %}
 					<!-- Navbar Search -->
+					{% if userconnected.role=="Admin" %}
 					<li class="nav-item">
 						<a class="nav-link" data-widget="navbar-search" href="#" role="button">
 							<i class="fas fa-search"></i>
@@ -65,7 +73,7 @@
 						<div class="navbar-search-block">
 							<form class="form-inline">
 								<div class="input-group input-group-sm">
-									<input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+									<input class="form-control form-control-navbar" id="searchInput" onkeyup="searchTable()" type="search" placeholder="Search" aria-label="Search">
 									<div class="input-group-append">
 										<button class="btn btn-navbar" type="submit">
 											<i class="fas fa-search"></i>
@@ -78,7 +86,7 @@
 							</form>
 						</div>
 					</li>
-
+					{% endif %}
 					<!-- Messages Dropdown Menu -->
 					<li class="nav-item dropdown">
 						<a class="nav-link" data-toggle="dropdown" href="#">
@@ -213,7 +221,7 @@
 							<img src="{{ asset('img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
 						</div>
 						<div class="info">
-							<a href="#" class="d-block">Mayahi Nasr</a>
+							<a href="#" class="d-block">Bachhamba Sarra</a>
 						</div>
 					</div>
 
@@ -222,8 +230,9 @@
 
 					<!-- Sidebar Menu -->
 					<nav class="mt-2">
-						<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					{% if userconnected.role=="Admin"%}
 
+						<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             	<li class="nav-item ">
 								<a href="#" class="nav-link ">
 									<i class="nav-icon fas fa-tachometer-alt"></i>
@@ -233,6 +242,7 @@
 
 									</p>
 								</a>
+								
 								<ul class="nav nav-treeview">
 									<li class="nav-item">
 										<a href="{{ path('app_user_new') }}" class="nav-link">
@@ -244,6 +254,32 @@
 										<a href="{{ path('app_user_index') }}" class="nav-link">
 											<i class="far fa-circle nav-icon"></i>
 											<p>View Users List</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="{{ path('app_guide_new') }}" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Add Guide</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="{{ path('app_user_index') }}" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>View Guides List</p>
+										</a>
+									</li>
+
+
+									<li class="nav-item">
+										<a href="{{ path('app_tourist_new') }}" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Add Tourist</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="{{ path('app_user_index') }}" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>View Tourists List</p>
 										</a>
 									</li>
 
@@ -477,14 +513,46 @@
 							</li>
 
 						</ul>
+						{% endif %}
 					</nav>
 					<!-- /.sidebar-menu -->
+					<div id="user-info" style="position: fixed; top: 40px; left: 0; background-color: #343a40; display: none;">
+
+								<div class="container">
+									<div class="row">
+										<div class="col-sm">
+											<p style="color: #cccecf">Bonjour {{ userconnected.userFirstname }}{{ userconnected.userLastname }}</p>
+										</div>
+										<div class="col-sm">
+											<a href="{{ path('app_user_updateprofile') }}" class="nav-link" style="color:#cccecf;"><i class="fas fa-sign-in-alt">&nbsp;Modifier</i></a>
+
+										</div>
+										<div class="col-sm">
+											<a href="{{ path('app_logout') }}" class="nav-link" style="color:#cccecf;"><i class="fas fa-sign-in-alt">&nbsp;Logout</i></a>
+										</div>
+									</div>
+								</div>
+							</div>
 				</div>
 				<!-- /.sidebar -->
 			</aside>
 
 			{% block body %}{% endblock %}
 		</div>
+		<script>
+			$(document).ready(function() {
+				console.log("T1");
+				$('#user-icon').click(function() {
+					var iconOffset = $('#user-icon').offset();
+					var infoLeft = iconOffset.left - 10; // Subtract 10 pixels from the left offset
+					$('#user-info').css({
+						top: iconOffset.top + 50,
+						left: infoLeft -100
+					}).toggle();
+				});
+			});
+
+		</script>
 		<!-- jQuery -->
 		<script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script>
 		<!-- Bootstrap -->

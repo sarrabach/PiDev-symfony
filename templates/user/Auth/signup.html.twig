@@ -1,0 +1,132 @@
+<head>
+    <title>Login 10</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{{ asset('AuthDesign/css/style.css')}}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+</head>
+
+<body class="img js-fullheight"  style="background-image: url({{ asset('AuthDesign/images/bg.jpg') }} );background-repeat: repeat">
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <img src="{{ asset('AuthDesign/images/Logo.png')}}" style="height: 200px">
+                <p style="color: white">Créer un compte pour un <button class="btn btn-info" id="button1" >Touriste</button> ou  bien un <button class="btn btn-warning" id="button2" >Guide</button>  </p>
+            </div>
+        </div>
+
+        <div id="form1" style="display:none;" class="row justify-content-center">
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="login-wrap p-0">
+                    {{ form_start(formTouriste) }}
+                    <div class="form-group">
+                        {{ form_row(formTouriste.userFirstname) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formTouriste.userLastname) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formTouriste.userMail) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formTouriste.userPhone) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formTouriste.username) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formTouriste.password) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formTouriste.nationality) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formTouriste.langue) }}
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-primary submit px-3">Créer un compte</button>
+                    </div>
+                    {{ form_end(formTouriste) }}
+                </div>
+            </div>
+        </div>
+        <div id="form2" style="display:none;" class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-wrap p-0">
+                    {{ form_start(formGuide) }}
+                    <div class="form-group">
+                        {{ form_row(formGuide.userFirstname) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formGuide.userLastname) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formGuide.userMail) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formGuide.userPhone) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formGuide.username) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formGuide.password) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formGuide.lang1) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formGuide.lang2) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formGuide.lang3) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(formGuide.cityname) }}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-primary submit px-3">Créer un compte</button>
+                    </div>
+                    {{ form_end(formGuide) }}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<script>
+    // Show/hide forms based on button clicks
+    $('#button1').click(function() {
+        console.log(true);
+        $('#form1').show();
+        $('#form2').hide();
+    });
+
+    $('#button2').click(function() {
+        console.log(true);
+        $('#form1').hide();
+        $('#form2').show();
+    });
+</script>
+<script src="{{ asset('AuthDesign/js/jquery.min.js')}}"></script>
+<script src="{{ asset('AuthDesign/js/popper.js')}}"></script>
+<script src="{{ asset('AuthDesign/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('AuthDesign/js/main.js')}}"></script>
+
+</body>

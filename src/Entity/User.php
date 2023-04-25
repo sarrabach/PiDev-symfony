@@ -45,6 +45,7 @@ class User
      * @ORM\Column(name="User_lastName", type="string", length=30, nullable=false)
      */
     #[Assert\NotBlank (message:"Please enter your lastname")]
+    #[Assert\Length (min:2 , max:30, minMessage:"Your lastname reference must be at least 2 caracteres", maxMessage:"Your lastname reference characters max is 30")]
     private $userLastname;
 
     /**
@@ -69,6 +70,7 @@ class User
      * @ORM\Column(name="Username", type="string", length=30, nullable=false)
      */
     #[Assert\NotBlank (message:"Please enter your username")]
+    #[Assert\Length (min:2 , minMessage:"Your firstname reference must be at least 2 caracteres")]
     private $username;
 
     /**

@@ -4,10 +4,12 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\Utilisateur;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -45,7 +47,27 @@ class UtilisateurRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
+    public function findByIDobject(string $id): ?User
+    {
+        return $this->findOneBy(['idUser' => $id]);
+    }
+    public function findByemail(string $email): ?User
+    {
+        return $this->findOneBy(['userMail' => $email]);
+    }
+    public function findGuidewithdates(DateTime $d1, DateTime $d2, string $city): ?User
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->where('u.datebeg >= :d1')
+            ->andWhere('u.dateend >= :d2')
+            ->andWhere('u.cityname = :city')
+            ->setParameter('d1', $d1)
+            ->setParameter('d2', $d2)
+            ->setParameter('city', $city);
+        $query = $qb->getQuery();
+        $user = $query->getOneOrNullResult();
+        return $user;
+    }
     // /**
     //  * @return Utilisateur[] Returns an array of Utilisateur objects
     //  */

@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Admin{% endblock %}
+
+{% block body %}
+    <style>
+        .container {
+            padding: 2rem 0rem;
+        }
+
+        h4 {
+            margin: 2rem 0rem;
+        }
+
+        .panel {
+            border-radius: 4px;
+            padding: 1rem;
+            margin-top: 0.2rem;
+        }
+    </style>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#form">
+            Add
+        </button>
+    </div>
+    <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter une destination</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img src="https://tendances-tourisme.fr/wp-content/uploads/2013/10/touristes.jpg" style="height: 400px" alt="image description" class="img-fluid">
+                            </div>
+                            {{ form_start(form) }}
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form_row(form.cityname) }}
+                                </div>
+                                <div class="form-group">
+                                   {{ form_label(form.datebeg) }}
+        {{ form_widget(form.datebeg) }}
+        {{ form_errors(form.datebeg) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.dateend) }}
+        {{ form_widget(form.dateend) }}
+        {{ form_errors(form.dateend) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                            {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <script>
+			$(document).ready(function() {
+				console.log("T1");
+				$('#user-icon').click(function() {
+					var iconOffset = $('#user-icon').offset();
+					var infoLeft = iconOffset.left - 10; // Subtract 10 pixels from the left offset
+					$('#user-info').css({
+						top: iconOffset.top + 50,
+						left: infoLeft -100
+					}).toggle();
+				});
+			});
+
+		</script>
+{% endblock %}
+

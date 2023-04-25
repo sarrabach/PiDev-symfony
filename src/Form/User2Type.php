@@ -23,26 +23,26 @@ class User2Type extends AbstractType
         $builder
             // Name fields
             ->add('userFirstname', TextType::class, [
-                'label' => 'First Name'
+                'label' => 'First Name','attr'=>['class'=>'form-control']
             ])
             ->add('userLastname', TextType::class, [
-                'label' => 'Last Name'
+                'label' => 'Last Name','attr'=>['class'=>'form-control']
             ])
  
             // Contact fields
             ->add('userMail', EmailType::class, [
-                'label' => 'Email'
+                'label' => 'Email','attr'=>['class'=>'form-control']
             ])
             ->add('userPhone', TelType::class, [
-                'label' => 'Phone'
+                'label' => 'Phone','attr'=>['class'=>'form-control']
             ])
  
             // Login fields
             ->add('username', TextType::class, [
-                'label' => 'Username'
+                'label' => 'Username','attr'=>['class'=>'form-control']
             ])
             ->add('password', PasswordType::class, [
-                'label' => 'Password'
+                'label' => 'Password','attr'=>['class'=>'form-control']
             ])
  
             // Role field
@@ -55,12 +55,18 @@ class User2Type extends AbstractType
                 ]
             ])
             ->add('nationality', CountryType::class, [
-                'label' => 'Nationality'
+                'label' => 'Nationality','attr'=>['class'=>'form-control'],
+                'choice_attr' => function($choice, $key, $value) {
+                    return ['style' => 'color: black;']; // Add style attribute to change the color of text
+                }
             ])
  
             // Additional language field
             ->add('langue', LanguageType::class, [
-                'label' => 'Additional Language'
+                'label' => 'Additional Language','attr'=>['class'=>'form-control'],
+                'choice_attr' => function($choice, $key, $value) {
+                    return ['style' => 'color: black;']; // Add style attribute to change the color of text
+                }
             ])
             
             ->add('submit',SubmitType::class)
